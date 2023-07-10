@@ -1,0 +1,56 @@
+{
+  "createTime": 1688937729976,
+  "updateTime": 1689017770983,
+  "name": "Common_Room_to_Email",
+  "description": "Commonroom.io to Brevo Email API",
+  "version": 1,
+  "tasks": [
+    {
+      "name": "post_brevo_email_api",
+      "taskReferenceName": "post_brevo_email_api_ref",
+      "inputParameters": {
+        "http_request": {
+          "uri": "https://api.brevo.com/v3/smtp/email",
+          "method": "POST",
+          "connectionTimeOut": 3000,
+          "readTimeOut": 3000,
+          "accept": "application/json",
+          "contentType": "application/json",
+          "headers": {
+            "api-key": "${workflow.secrets.brevoapikey}"
+          },
+          "body": "{  \n   \"sender\":{  \n      \"name\":\"Sender Alex\",\n      \"email\":\"senderalex@example.com\"\n   },\n   \"to\":[  \n      {  \n         \"email\":\"${workflow.input.payload.primaryEmail}\",\n         \"name\":\"${workflow.input.payload.fullName}\"\n      }\n   ],\n   \"subject\":\"Hello world\",\n   \"htmlContent\":\"<html><head></head><body><p>Hello,</p>This is my first transactional email sent from Brevo.</p></body></html>\"\n}"
+        }
+      },
+      "type": "HTTP",
+      "decisionCases": {},
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "onStateChange": {}
+    }
+  ],
+  "inputParameters": [
+    "activity",
+    "primaryEmail",
+    "fullName"
+  ],
+  "outputParameters": {
+    "data": "${workflow.input.payload.primaryEmail}"
+  },
+  "failureWorkflow": "",
+  "schemaVersion": 2,
+  "restartable": true,
+  "workflowStatusListenerEnabled": false,
+  "ownerEmail": "atwong@alumni.uci.edu",
+  "timeoutPolicy": "ALERT_ONLY",
+  "timeoutSeconds": 0,
+  "variables": {},
+  "inputTemplate": {},
+  "onStateChange": {}
+}

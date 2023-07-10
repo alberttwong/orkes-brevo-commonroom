@@ -1,0 +1,68 @@
+{
+  "createTime": 1688967457476,
+  "updateTime": 1689017855380,
+  "name": "CommonRoom_WebHook",
+  "description": "Edit or extend this sample workflow. Set the workflow name to get started",
+  "version": 1,
+  "tasks": [
+    {
+      "name": "get_random_fact",
+      "taskReferenceName": "get_random_fact",
+      "inputParameters": {
+        "http_request": {
+          "uri": "https://orkes-api-tester.orkesconductor.com/api",
+          "method": "GET",
+          "connectionTimeOut": 3000,
+          "readTimeOut": 3000,
+          "accept": "application/json",
+          "contentType": "application/json"
+        }
+      },
+      "type": "HTTP",
+      "decisionCases": {},
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "onStateChange": {}
+    },
+    {
+      "name": "webhook_task_4fnn8",
+      "taskReferenceName": "webhook_task_4fnn8_ref",
+      "inputParameters": {
+        "matches": {
+          "$['payload']['type']": "${workflow.input.payload.type}"
+        }
+      },
+      "type": "WAIT_FOR_WEBHOOK",
+      "decisionCases": {},
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "onStateChange": {}
+    }
+  ],
+  "inputParameters": [],
+  "outputParameters": {
+    "data": "${get_random_fact.output.response.body.fact}"
+  },
+  "failureWorkflow": "",
+  "schemaVersion": 2,
+  "restartable": true,
+  "workflowStatusListenerEnabled": false,
+  "ownerEmail": "atwong@alumni.uci.edu",
+  "timeoutPolicy": "ALERT_ONLY",
+  "timeoutSeconds": 0,
+  "variables": {},
+  "inputTemplate": {},
+  "onStateChange": {}
+}
